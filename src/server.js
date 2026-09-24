@@ -1,9 +1,14 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import { logger } from './middleware/logger';
-import { notFoundHandler } from './middleware/notFoundHandler';
-import { errorHandler } from './middleware/errorHandler';
+import { logger } from './middleware/logger.js';
+import { notFoundHandler } from './middleware/notFoundHandler.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import connectMongoDB from './db/connectMongoDB.js';
+
+import dns from 'node:dns'; //!-
+
+dns.setServers(['8.8.8.8', '8.8.4.4']); //!-
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -28,7 +33,9 @@ app.get('/test-error', (req, res, next) => {
 app.use(notFoundHandler);
 
 app.use(errorHandler);
+('');
 
+await connectMongoDB();
 app.listen(PORT, () => {
   console.log(`Server start in port${PORT}`);
 });
