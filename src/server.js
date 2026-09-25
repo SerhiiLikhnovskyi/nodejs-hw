@@ -7,7 +7,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import connectMongoDB from './db/connectMongoDB.js';
 import notesRouter from './routes/notesRouter.js';
 
-import dns from 'node:dns'; //!-
+import dns from 'node:dns';
 
 dns.setServers(['8.8.8.8', '8.8.4.4']); //!-
 
