@@ -8,6 +8,7 @@ import connectMongoDB from './db/connectMongoDB.js';
 import notesRoutes from './routes/notesRoutes.js';
 
 import dns from 'node:dns';
+import { errors } from 'celebrate';
 
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(notesRoutes);
 app.use(notFoundHandler);
 
+app.use(errors());
 app.use(errorHandler);
 
 await connectMongoDB();
