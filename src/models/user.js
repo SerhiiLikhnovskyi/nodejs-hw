@@ -3,10 +3,10 @@ import { model, Schema } from 'mongoose';
 const userSchema = new Schema(
   {
     username: { type: String, trim: true },
-    email: { type: String, trim: true, unique: true },
-    password: { type: String, trim: true },
+    email: { type: String, trim: true, unique: true, required: true },
+    password: { type: String, trim: true, required: true },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 userSchema.pre('save', function () {
   if (!this.username) {
@@ -17,7 +17,7 @@ userSchema.pre('save', function () {
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
-  delete obj.__v;
+
   return obj;
 };
 
